@@ -29,7 +29,7 @@
         .card {
             position: relative;
             width: 320px;
-            height: 220px;
+            height: 250px;
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
@@ -43,7 +43,7 @@
         }
 
         #verse {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: bold;
             font-style: italic;
             color: #222;
@@ -52,10 +52,16 @@
         }
 
         #reference {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: normal;
             color: #777;
-            margin-top: 10px;
+            margin-top: 1px;
+        }
+
+        .logo {
+            margin-top: -6px;
+            width: 75px;
+            height: auto;
         }
 
         .scratch-canvas {
@@ -66,6 +72,15 @@
             height: 100%;
             cursor: grab;
         }
+
+        .message {
+            color: red;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: -3px;
+            font-family:'Book Antiqua'
+
+        }
     </style>
 </head>
 <body>
@@ -74,103 +89,22 @@
     <div class="card">
         <p id="verse"></p>
         <p id="reference"></p>
+        <img src="logo.png" alt="Logo" class="logo">
         <canvas class="scratch-canvas"></canvas>
+        <p class="message" id="message"></p>
     </div>
+
     <script>
         const verses = [
-        { text: "O Senhor é meu pastor, nada me falta.", reference: "Salmos 23:1" },
-        { text: "Porque Deus amou o mundo de tal maneira...", reference: "João 3:16" },
-        { text: "Posso todas as coisas naquele que me fortalece.", reference: "Filipenses 4:13" },
-        { text: "Buscai primeiro o Reino de Deus...", reference: "Mateus 6:33" },
-        { text: "Confia no Senhor de todo o teu coração...", reference: "Provérbios 3:5-6" },
-        { text: "No princípio, Deus criou os céus e a terra.", reference: "Gênesis 1:1" },
-        { text: "O Senhor é a minha luz e a minha salvação; a quem temerei?", reference: "Salmos 27:1" },
-        { text: "Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.", reference: "Salmos 91:1" },
-        { text: "Clama a mim, e responder-te-ei e anunciar-te-ei coisas grandes e firmes que não sabes.", reference: "Jeremias 33:3" },
-        { text: "E sabemos que todas as coisas cooperam para o bem daqueles que amam a Deus.", reference: "Romanos 8:28" },
-        { text: "Ensina-nos a contar os nossos dias, para que alcancemos coração sábio.", reference: "Salmos 90:12" },
-        { text: "O choro pode durar uma noite, mas a alegria vem pela manhã.", reference: "Salmos 30:5" },
-        { text: "Tudo o que fizerem, façam de todo o coração, como para o Senhor.", reference: "Colossenses 3:23" },
-        { text: "Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.", reference: "1 Tessalonicenses 5:18" },
-        { text: "Mas os que esperam no Senhor renovarão as suas forças; subirão com asas como águias.", reference: "Isaías 40:31" },
-        { text: "Não fui eu que lhe ordenei? Seja forte e corajoso! Não se apavore nem desanime.", reference: "Josué 1:9" },
-        { text: "O coração do homem pode fazer planos, mas a resposta certa vem dos lábios do Senhor.", reference: "Provérbios 16:1" },
-        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
-        { text: "Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu.", reference: "Eclesiastes 3:1" },
-        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor.", reference: "Jeremias 29:11" },
-        { text: "Deleita-te no Senhor, e Ele concederá os desejos do teu coração.", reference: "Salmos 37:4" },
-        { text: "Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho.", reference: "Salmos 119:105" },
-        { text: "Não vos conformeis com este mundo, mas transformai-vos pela renovação da vossa mente.", reference: "Romanos 12:2" },
-        { text: "Esforça-te, e tem bom ânimo! Não temas, nem te espantes.", reference: "Josué 1:9" },
-        { text: "Alegrai-vos sempre no Senhor. Outra vez digo: alegrai-vos!", reference: "Filipenses 4:4" },
-        { text: "Bem-aventurados os que têm fome e sede de justiça, porque serão fartos.", reference: "Mateus 5:6" },
-        { text: "Lançando sobre Ele toda a vossa ansiedade, porque Ele tem cuidado de vós.", reference: "1 Pedro 5:7" },
-        { text: "Porque para Deus nada é impossível.", reference: "Lucas 1:37" },
-        { text: "Porque onde estiver o teu tesouro, aí estará também o teu coração.", reference: "Mateus 6:21" },
-        { text: "E tudo quanto fizerdes, fazei-o de todo o coração, como ao Senhor, e não aos homens.", reference: "Colossenses 3:23" },
-        { text: "E disse-lhes: Ide por todo o mundo e pregai o evangelho a toda criatura.", reference: "Marcos 16:15" },
-        { text: "O temor do Senhor é o princípio da sabedoria.", reference: "Provérbios 9:10" },
-        { text: "A paz de Deus, que excede todo entendimento, guardará os vossos corações e os vossos pensamentos em Cristo Jesus.", reference: "Filipenses 4:7" },
-        { text: "Entrega o teu caminho ao Senhor; confia nele, e ele o fará.", reference: "Salmos 37:5" },
-        { text: "Melhor é o pouco com o temor do Senhor do que um grande tesouro onde há inquietação.", reference: "Provérbios 15:16" },
-        { text: "Bem-aventurados os misericordiosos, porque alcançarão misericórdia.", reference: "Mateus 5:7" },
-        { text: "Porque Deus não nos deu espírito de temor, mas de fortaleza, e de amor, e de moderação.", reference: "2 Timóteo 1:7" },
-        { text: "Bendize, ó minha alma, ao Senhor, e tudo o que há em mim bendiga o seu santo nome.", reference: "Salmos 103:1" },
-        { text: "Porque estou certo de que, nem a morte, nem a vida, nem anjos, nem potestades... nos poderá separar do amor de Deus.", reference: "Romanos 8:38-39" },
-        { text: "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei.", reference: "Mateus 11:28" },
-        { text: "O Senhor é bom, é fortaleza no dia da angústia e conhece os que nele confiam.", reference: "Naum 1:7" },
-        { text: "Aquele que está em vocês é maior do que aquele que está no mundo.", reference: "1 João 4:4" },
-        { text: "Sujeitai-vos, pois, a Deus, resisti ao diabo, e ele fugirá de vós.", reference: "Tiago 4:7" },
-        { text: "Não se turbe o vosso coração; credes em Deus, crede também em mim.", reference: "João 14:1" },
-        { text: "Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.", reference: "Isaías 41:10" },
-        { text: "O Senhor está perto de todos os que o invocam, de todos os que o invocam em verdade.", reference: "Salmos 145:18" },
-        { text: "O Senhor é bom para com aqueles cuja esperança está nele, para com aqueles que o buscam.", reference: "Lamentações 3:25" },
-        { text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", reference: "1 Pedro 5:7" },
-        { text: "Mas buscai primeiro o seu Reino e a sua justiça, e todas essas coisas vos serão acrescentadas.", reference: "Mateus 6:33" },
-        { text: "Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia.", reference: "Salmos 46:1" },
-        { text: "O Senhor está perto de todos os que o invocam, de todos os que o invocam com sinceridade.", reference: "Salmos 145:18" },
-        { text: "Aquele que começou boa obra em vocês, vai completá-la até o dia de Cristo Jesus.", reference: "Filipenses 1:6" },
-        { text: "O Senhor luta por vocês; apenas acalmem-se.", reference: "Êxodo 14:14" },
-        { text: "O Senhor é bom, um refúgio em tempos de angústia. Ele protege os que nele confiam.", reference: "Naum 1:7" },
-        { text: "Alegrem-se sempre no Senhor. Novamente direi: Alegrem-se!", reference: "Filipenses 4:4" },
-        { text: "Dêem graças em todas as circunstâncias, pois esta é a vontade de Deus para vocês em Cristo Jesus.", reference: "1 Tessalonicenses 5:18" },
-        { text: "O Senhor é misericordioso e compassivo, paciente e transbordante de amor.", reference: "Salmos 145:8" },
-        { text: "Pois sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano.", reference: "Jeremias 29:11" },
-        { text: "Porque vivemos por fé, e não pelo que vemos.", reference: "2 Coríntios 5:7" },
-        { text: "A minha graça é suficiente para você, pois o meu poder se aperfeiçoa na fraqueza.", reference: "2 Coríntios 12:9" },
-        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
-        { text: "Aqueles que semeiam com lágrimas, com cânticos de alegria colherão.", reference: "Salmos 126:5" },
-        { text: "Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.", reference: "Provérbios 3:5" },
-        { text: "O Senhor dá força ao seu povo; o Senhor dá ao seu povo a bênção da paz.", reference: "Salmos 29:11" },
-        { text: "Ele fortalece o cansado e dá grande vigor ao que está sem forças.", reference: "Isaías 40:29" },
-        { text: "O justo viverá pela fé.", reference: "Romanos 1:17" },
-        { text: "O Senhor firma os passos de um homem, quando a conduta deste o agrada.", reference: "Salmos 37:23" },
-        { text: "Venham a mim, todos os que estão cansados e sobrecarregados, e eu lhes darei descanso.", reference: "Mateus 11:28" },
-        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano.", reference: "Jeremias 29:11" },
-        { text: "O Senhor é minha luz e minha salvação; de quem terei medo?", reference: "Salmos 27:1" },
-        { text: "O amor é paciente, o amor é bondoso. Não inveja, não se vangloria, não se orgulha.", reference: "1 Coríntios 13:4" },
-        { text: "A tua palavra é lâmpada que ilumina os meus passos e luz que clareia o meu caminho.", reference: "Salmos 119:105" },
-        { text: "Esforcem-se para viver em paz com todos e para serem santos; sem santidade ninguém verá o Senhor.", reference: "Hebreus 12:14" },
-        { text: "O Senhor está perto dos que têm o coração quebrantado e salva os de espírito abatido.", reference: "Salmos 34:18" },
-        { text: "Tudo posso naquele que me fortalece.", reference: "Filipenses 4:13" },
-        { text: "Louvarei ao Senhor em todo tempo; o seu louvor estará continuamente na minha boca.", reference: "Salmos 34:1" },
-        { text: "Não se deixem vencer pelo mal, mas vençam o mal com o bem.", reference: "Romanos 12:21" },
-        { text: "O meu Deus suprirá todas as necessidades de vocês, de acordo com as suas gloriosas riquezas em Cristo Jesus.", reference: "Filipenses 4:19" },
-        { text: "E sabemos que em todas as coisas Deus trabalha para o bem daqueles que o amam.", reference: "Romanos 8:28" },
-        { text: "Seja forte e corajoso! Não tenha medo nem fique apavorado, pois o Senhor, o seu Deus, estará com você por onde você andar.", reference: "Josué 1:9" },
-        { text: "Se confessarmos os nossos pecados, ele é fiel e justo para nos perdoar os pecados e nos purificar de toda injustiça.", reference: "1 João 1:9" },
-        { text: "Antes de formá-lo no ventre eu o escolhi; antes de você nascer, eu o separei.", reference: "Jeremias 1:5" },
-        { text: "Mas os que esperam no Senhor renovarão as suas forças.", reference: "Isaías 40:31" },
-        { text: "O Senhor te abençoe e te guarde; o Senhor faça resplandecer o seu rosto sobre ti e te conceda graça.", reference: "Números 6:24-25" },
+            { text: "O Senhor é meu pastor, nada me falta.", reference: "Salmos 23:1" },
+            { text: "Porque Deus amou o mundo de tal maneira...", reference: "João 3:16" },
+            { text: "Quem nos separará do amor de Cristo? Será tribulação, ou angústia, ou perseguição?", reference: "Romanos 8:35" }
         ];
-
-        const randomVerse = verses[Math.floor(Math.random() * verses.length)];
-        document.getElementById('verse').innerText = `"${randomVerse.text}"`;
-        document.getElementById('reference').innerText = randomVerse.reference;
 
         const canvas = document.querySelector('.scratch-canvas');
         const ctx = canvas.getContext('2d');
         const card = document.querySelector('.card');
+        const message = document.getElementById('message');
 
         function resizeCanvas() {
             canvas.width = card.offsetWidth;
@@ -206,13 +140,45 @@
             ctx.fill();
         }
 
-        canvas.addEventListener('mousedown', () => isDrawing = true);
-        canvas.addEventListener('mouseup', () => isDrawing = false);
-        canvas.addEventListener('mousemove', scratch);
-        
-        canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
-        canvas.addEventListener('touchend', () => isDrawing = false);
-        canvas.addEventListener('touchmove', scratch);
+        // Função para obter ou definir o versículo do dia no localStorage
+        function getTodaysVerse() {
+            const currentDate = new Date().toLocaleDateString();
+            const savedData = JSON.parse(localStorage.getItem('todaysVerse'));
+
+            if (savedData && savedData.date === currentDate) {
+                return savedData.verse;
+            } else {
+                const newVerse = verses[Math.floor(Math.random() * verses.length)];
+                localStorage.setItem('todaysVerse', JSON.stringify({ date: currentDate, verse: newVerse }));
+                return newVerse;
+            }
+        }
+
+        function checkLastUsedDate() {
+            const currentDate = new Date().toLocaleDateString();
+            const lastUsedDate = localStorage.getItem('lastUsedDate');
+            const todaysVerse = getTodaysVerse();
+
+            document.getElementById('verse').innerText = `"${todaysVerse.text}"`;
+            document.getElementById('reference').innerText = todaysVerse.reference;
+
+            if (lastUsedDate === currentDate) {
+                message.innerText = "Deus já falou contigo hoje. Volte novamente amanhã.";
+                canvas.style.display = 'none';
+            } else {
+                localStorage.setItem('lastUsedDate', currentDate);
+                canvas.style.display = 'block';
+                canvas.addEventListener('mousedown', () => isDrawing = true);
+                canvas.addEventListener('mouseup', () => isDrawing = false);
+                canvas.addEventListener('mousemove', scratch);
+
+                canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
+                canvas.addEventListener('touchend', () => isDrawing = false);
+                canvas.addEventListener('touchmove', scratch);
+            }
+        }
+
+        checkLastUsedDate();
     </script>
 </body>
 </html>
