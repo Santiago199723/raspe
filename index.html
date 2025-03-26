@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raspadinha Bíblica</title>
+    <link rel="icon" type="image/png" sizes="50x50" href="logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap');
-
+        
         body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-image: url('fundo.png'); /* Substitua 'fundo.jpg' pelo nome da sua imagem */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita repetição */
             font-family: 'Georgia', serif;
             text-align: center;
         }
 
+
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 42px;
+            font-size: 40px;
             color: #f83d3d;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
@@ -96,9 +101,9 @@
 
     <script>
         const verses = [
-            { text: "O Senhor é meu pastor, nada me falta.", reference: "Salmos 23:1" },
-            { text: "Porque Deus amou o mundo de tal maneira...", reference: "João 3:16" },
-            { text: "Posso todas as coisas naquele que me fortalece.", reference: "Filipenses 4:13" },
+        { text: "O Senhor é meu pastor, nada me falta.", reference: "Salmos 23:1" },
+        { text: "Porque Deus amou o mundo de tal maneira...", reference: "João 3:16" },
+        { text: "Posso todas as coisas naquele que me fortalece.", reference: "Filipenses 4:13" },
         { text: "Buscai primeiro o Reino de Deus...", reference: "Mateus 6:33" },
         { text: "Confia no Senhor de todo o teu coração...", reference: "Provérbios 3:5-6" },
         { text: "No princípio, Deus criou os céus e a terra.", reference: "Gênesis 1:1" },
@@ -272,7 +277,40 @@
         { text: "Porque o Senhor repreende aquele a quem ama, assim como o pai ao filho a quem quer bem.", reference: "Provérbios 3:12" },  
         { text: "Não sejais vagarosos no cuidado; sede fervorosos no espírito, servindo ao Senhor.", reference: "Romanos 12:11" },  
         { text: "Não desprezeis as profecias, mas examinai tudo e retende o bem.", reference: "1 Tessalonicenses 5:20-21" },
+        { text: "No princípio, criou Deus os céus e a terra.", reference: "Gênesis 1:1" },
+        { text: "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.", reference: "João 3:16" },
+        { text: "Tudo posso naquele que me fortalece.", reference: "Filipenses 4:13" },
+        { text: "Clama a mim, e responder-te-ei, e anunciar-te-ei coisas grandes e firmes que não sabes.", reference: "Jeremias 33:3" },
+        { text: "Lâmpada para os meus pés é tua palavra, e luz para o meu caminho.", reference: "Salmos 119:105" },
+        { text: "Deem graças em todas as circunstâncias, pois esta é a vontade de Deus para vocês em Cristo Jesus.", reference: "1 Tessalonicenses 5:18" },
+        { text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", reference: "1 Pedro 5:7" },
+        { text: "Sujeitai-vos, pois, a Deus; resisti ao diabo, e ele fugirá de vós.", reference: "Tiago 4:7" },
+        { text: "Não se turbe o vosso coração; credes em Deus, crede também em mim.", reference: "João 14:1" },
+        { text: "Perto está o Senhor dos que têm o coração quebrantado e salva os contritos de espírito.", reference: "Salmos 34:18" },
+        { text: "Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.", reference: "Mateus 6:33" },
+        { text: "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.", reference: "Provérbios 9:10" },
+        { text: "Ensina-nos a contar os nossos dias, de tal maneira que alcancemos corações sábios.", reference: "Salmos 90:12" },
+        { text: "O Senhor é a minha luz e a minha salvação; a quem temerei? O Senhor é a força da minha vida; de quem me recearei?", reference: "Salmos 27:1" },
+        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano, planos de dar a vocês esperança e um futuro.", reference: "Jeremias 29:11" },
+        { text: "E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.", reference: "Romanos 8:28" },
+        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
+        { text: "Alegrai-vos sempre no Senhor; outra vez digo: alegrai-vos.", reference: "Filipenses 4:4" },
+        { text: "Não desprezeis as profecias, mas examinai tudo e retende o bem.", reference: "1 Tessalonicenses 5:20-21" },
+        { text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", reference: "1 Pedro 5:7" },
+        { text: "Não se turbe o vosso coração; credes em Deus, crede também em mim.", reference: "João 14:1" },
+        { text: "Perto está o Senhor dos que têm o coração quebrantado e salva os contritos de espírito.", reference: "Salmos 34:18" },
+        { text: "Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.", reference: "Mateus 6:33" },
+        { text: "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.", reference: "Provérbios 9:10" },
+        { text: "Ensina-nos a contar os nossos dias, de tal maneira que alcancemos corações sábios.", reference: "Salmos 90:12" },
+        { text: "O Senhor é a minha luz e a minha salvação; a quem temerei? O Senhor é a força da minha vida; de quem me recearei?", reference: "Salmos 27:1" },
+        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano, planos de dar a vocês esperança e um futuro.", reference: "Jeremias 29:11" },
+        { text: "E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.", reference: "Romanos 8:28" },
+        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
+        { text: "Alegrai-vos sempre no Senhor; outra vez digo: alegrai-vos.", reference: "Filipenses 4:4" },
+        { text: "Não desprezeis as profecias, mas examinai tudo e retende o bem.", reference: "1 Tessalonicenses 5:20-21" },
         { text: "Quem nos separará do amor de Cristo? Será tribulação, ou angústia, ou perseguição?", reference: "Romanos 8:35" }
+
+      
 
         ];
 
