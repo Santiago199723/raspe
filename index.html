@@ -25,27 +25,53 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 40px;
+            font-size: 35px;
             color: #f83d3d;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
         }
 
         .card {
-            position: relative;
-            width: 320px;
-            height: 250px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            overflow: hidden;
-        }
+    position: relative;
+    width: 320px;
+    height: 250px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+    border: 2px solid transparent; /* Borda inicial */
+}
+
+/* Efeito de brilho na borda */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: -8px; /* Expande um pouco além da borda */
+    border-radius: 12px;
+    background: linear-gradient(45deg, rgba(253, 21, 21, 0.8), rgba(255, 100, 100, 0.4), rgba(255, 0, 0, 0.8));
+    z-index: -1;
+    filter: blur(15px); /* Deixa o brilho mais suave */
+    animation: borderGlow 2s infinite alternate ease-in-out;
+}
+
+/* Animação para o brilho pulsar */
+@keyframes borderGlow {
+    0% {
+        opacity: 0.6;
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(15px);
+    }
+}
+
 
         #verse {
             font-size: 21px;
@@ -64,7 +90,7 @@
         }
 
         .logo {
-            margin-top: -6px;
+            margin-top: 8px;
             width: 75px;
             height: auto;
         }
@@ -82,7 +108,7 @@
             color: red;
             font-size: 13px;
             font-weight: bold;
-            margin-top: -3px;
+            margin-top: px;
             font-family:'Book Antiqua'
 
         }
@@ -101,280 +127,91 @@
 
     <script>
         const verses = [
-        { text: "O Senhor é meu pastor, nada me falta.", reference: "Salmos 23:1" },
-        { text: "Porque Deus amou o mundo de tal maneira...", reference: "João 3:16" },
-        { text: "Posso todas as coisas naquele que me fortalece.", reference: "Filipenses 4:13" },
-        { text: "Buscai primeiro o Reino de Deus...", reference: "Mateus 6:33" },
-        { text: "Confia no Senhor de todo o teu coração...", reference: "Provérbios 3:5-6" },
-        { text: "No princípio, Deus criou os céus e a terra.", reference: "Gênesis 1:1" },
-        { text: "O Senhor é a minha luz e a minha salvação; a quem temerei?", reference: "Salmos 27:1" },
-        { text: "Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.", reference: "Salmos 91:1" },
-        { text: "Clama a mim, e responder-te-ei e anunciar-te-ei coisas grandes e firmes que não sabes.", reference: "Jeremias 33:3" },
-        { text: "E sabemos que todas as coisas cooperam para o bem daqueles que amam a Deus.", reference: "Romanos 8:28" },
-        { text: "Ensina-nos a contar os nossos dias, para que alcancemos coração sábio.", reference: "Salmos 90:12" },
-        { text: "O choro pode durar uma noite, mas a alegria vem pela manhã.", reference: "Salmos 30:5" },
-        { text: "Tudo o que fizerem, façam de todo o coração, como para o Senhor.", reference: "Colossenses 3:23" },
-        { text: "Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.", reference: "1 Tessalonicenses 5:18" },
-        { text: "Mas os que esperam no Senhor renovarão as suas forças; subirão com asas como águias.", reference: "Isaías 40:31" },
-        { text: "Não fui eu que lhe ordenei? Seja forte e corajoso! Não se apavore nem desanime.", reference: "Josué 1:9" },
-        { text: "O coração do homem pode fazer planos, mas a resposta certa vem dos lábios do Senhor.", reference: "Provérbios 16:1" },
-        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
-        { text: "Tudo tem o seu tempo determinado, e há tempo para todo propósito debaixo do céu.", reference: "Eclesiastes 3:1" },
-        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor.", reference: "Jeremias 29:11" },
-        { text: "Deleita-te no Senhor, e Ele concederá os desejos do teu coração.", reference: "Salmos 37:4" },
-        { text: "Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho.", reference: "Salmos 119:105" },
-        { text: "Não vos conformeis com este mundo, mas transformai-vos pela renovação da vossa mente.", reference: "Romanos 12:2" },
-        { text: "Esforça-te, e tem bom ânimo! Não temas, nem te espantes.", reference: "Josué 1:9" },
-        { text: "Alegrai-vos sempre no Senhor. Outra vez digo: alegrai-vos!", reference: "Filipenses 4:4" },
-        { text: "Bem-aventurados os que têm fome e sede de justiça, porque serão fartos.", reference: "Mateus 5:6" },
-        { text: "Lançando sobre Ele toda a vossa ansiedade, porque Ele tem cuidado de vós.", reference: "1 Pedro 5:7" },
-        { text: "Porque para Deus nada é impossível.", reference: "Lucas 1:37" },
-        { text: "Porque onde estiver o teu tesouro, aí estará também o teu coração.", reference: "Mateus 6:21" },
-        { text: "E tudo quanto fizerdes, fazei-o de todo o coração, como ao Senhor, e não aos homens.", reference: "Colossenses 3:23" },
-        { text: "E disse-lhes: Ide por todo o mundo e pregai o evangelho a toda criatura.", reference: "Marcos 16:15" },
-        { text: "O temor do Senhor é o princípio da sabedoria.", reference: "Provérbios 9:10" },
-        { text: "A paz de Deus, que excede todo entendimento, guardará os vossos corações e os vossos pensamentos em Cristo Jesus.", reference: "Filipenses 4:7" },
-        { text: "Entrega o teu caminho ao Senhor; confia nele, e ele o fará.", reference: "Salmos 37:5" },
-        { text: "Melhor é o pouco com o temor do Senhor do que um grande tesouro onde há inquietação.", reference: "Provérbios 15:16" },
-        { text: "Bem-aventurados os misericordiosos, porque alcançarão misericórdia.", reference: "Mateus 5:7" },
-        { text: "Porque Deus não nos deu espírito de temor, mas de fortaleza, e de amor, e de moderação.", reference: "2 Timóteo 1:7" },
-        { text: "Bendize, ó minha alma, ao Senhor, e tudo o que há em mim bendiga o seu santo nome.", reference: "Salmos 103:1" },
-        { text: "Porque estou certo de que, nem a morte, nem a vida, nem anjos, nem potestades... nos poderá separar do amor de Deus.", reference: "Romanos 8:38-39" },
-        { text: "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei.", reference: "Mateus 11:28" },
-        { text: "O Senhor é bom, é fortaleza no dia da angústia e conhece os que nele confiam.", reference: "Naum 1:7" },
-        { text: "Aquele que está em vocês é maior do que aquele que está no mundo.", reference: "1 João 4:4" },
-        { text: "Sujeitai-vos, pois, a Deus, resisti ao diabo, e ele fugirá de vós.", reference: "Tiago 4:7" },
-        { text: "Não se turbe o vosso coração; credes em Deus, crede também em mim.", reference: "João 14:1" },
-        { text: "Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.", reference: "Isaías 41:10" },
-        { text: "O Senhor está perto de todos os que o invocam, de todos os que o invocam em verdade.", reference: "Salmos 145:18" },
-        { text: "O Senhor é bom para com aqueles cuja esperança está nele, para com aqueles que o buscam.", reference: "Lamentações 3:25" },
-        { text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", reference: "1 Pedro 5:7" },
-        { text: "Mas buscai primeiro o seu Reino e a sua justiça, e todas essas coisas vos serão acrescentadas.", reference: "Mateus 6:33" },
-        { text: "Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia.", reference: "Salmos 46:1" },
-        { text: "O Senhor está perto de todos os que o invocam, de todos os que o invocam com sinceridade.", reference: "Salmos 145:18" },
-        { text: "Aquele que começou boa obra em vocês, vai completá-la até o dia de Cristo Jesus.", reference: "Filipenses 1:6" },
-        { text: "O Senhor luta por vocês; apenas acalmem-se.", reference: "Êxodo 14:14" },
-        { text: "O Senhor é bom, um refúgio em tempos de angústia. Ele protege os que nele confiam.", reference: "Naum 1:7" },
-        { text: "Alegrem-se sempre no Senhor. Novamente direi: Alegrem-se!", reference: "Filipenses 4:4" },
-        { text: "Dêem graças em todas as circunstâncias, pois esta é a vontade de Deus para vocês em Cristo Jesus.", reference: "1 Tessalonicenses 5:18" },
-        { text: "O Senhor é misericordioso e compassivo, paciente e transbordante de amor.", reference: "Salmos 145:8" },
-        { text: "Pois sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano.", reference: "Jeremias 29:11" },
-        { text: "Porque vivemos por fé, e não pelo que vemos.", reference: "2 Coríntios 5:7" },
-        { text: "A minha graça é suficiente para você, pois o meu poder se aperfeiçoa na fraqueza.", reference: "2 Coríntios 12:9" },
-        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
-        { text: "Aqueles que semeiam com lágrimas, com cânticos de alegria colherão.", reference: "Salmos 126:5" },
-        { text: "Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.", reference: "Provérbios 3:5" },
-        { text: "O Senhor dá força ao seu povo; o Senhor dá ao seu povo a bênção da paz.", reference: "Salmos 29:11" },
-        { text: "Ele fortalece o cansado e dá grande vigor ao que está sem forças.", reference: "Isaías 40:29" },
-        { text: "O justo viverá pela fé.", reference: "Romanos 1:17" },
-        { text: "O Senhor firma os passos de um homem, quando a conduta deste o agrada.", reference: "Salmos 37:23" },
-        { text: "Venham a mim, todos os que estão cansados e sobrecarregados, e eu lhes darei descanso.", reference: "Mateus 11:28" },
-        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano.", reference: "Jeremias 29:11" },
-        { text: "O Senhor é minha luz e minha salvação; de quem terei medo?", reference: "Salmos 27:1" },
-        { text: "O amor é paciente, o amor é bondoso. Não inveja, não se vangloria, não se orgulha.", reference: "1 Coríntios 13:4" },
-        { text: "A tua palavra é lâmpada que ilumina os meus passos e luz que clareia o meu caminho.", reference: "Salmos 119:105" },
-        { text: "Esforcem-se para viver em paz com todos e para serem santos; sem santidade ninguém verá o Senhor.", reference: "Hebreus 12:14" },
-        { text: "O Senhor está perto dos que têm o coração quebrantado e salva os de espírito abatido.", reference: "Salmos 34:18" },
-        { text: "Tudo posso naquele que me fortalece.", reference: "Filipenses 4:13" },
-        { text: "Louvarei ao Senhor em todo tempo; o seu louvor estará continuamente na minha boca.", reference: "Salmos 34:1" },
-        { text: "Não se deixem vencer pelo mal, mas vençam o mal com o bem.", reference: "Romanos 12:21" },
-        { text: "O meu Deus suprirá todas as necessidades de vocês, de acordo com as suas gloriosas riquezas em Cristo Jesus.", reference: "Filipenses 4:19" },
-        { text: "E sabemos que em todas as coisas Deus trabalha para o bem daqueles que o amam.", reference: "Romanos 8:28" },
-        { text: "Seja forte e corajoso! Não tenha medo nem fique apavorado, pois o Senhor, o seu Deus, estará com você por onde você andar.", reference: "Josué 1:9" },
-        { text: "Se confessarmos os nossos pecados, ele é fiel e justo para nos perdoar os pecados e nos purificar de toda injustiça.", reference: "1 João 1:9" },
-        { text: "Antes de formá-lo no ventre eu o escolhi; antes de você nascer, eu o separei.", reference: "Jeremias 1:5" },
-        { text: "Mas os que esperam no Senhor renovarão as suas forças.", reference: "Isaías 40:31" },
-        { text: "O Senhor te abençoe e te guarde; o Senhor faça resplandecer o seu rosto sobre ti e te conceda graça.", reference: "Números 6:24-25" },
-        { text: "Aquele que tem o Filho tem a vida; aquele que não tem o Filho de Deus não tem a vida.", reference: "1 João 5:12" },
-        { text: "O Senhor dará força ao seu povo; o Senhor abençoará o seu povo com paz.", reference: "Salmos 29:11" },
-        { text: "Sede fortes, e revigore-se o vosso coração, vós todos que esperais no Senhor.", reference: "Salmos 31:24" },
-        { text: "O Senhor é a minha força e o meu cântico; ele me foi por salvação.", reference: "Salmos 118:14" },
-        { text: "Com efeito, grandes coisas fez o Senhor por nós; por isso, estamos alegres.", reference: "Salmos 126:3" },
-        { text: "O temor do Senhor é a fonte da vida, para desviar dos laços da morte.", reference: "Provérbios 14:27" },
-        { text: "Os que semeiam com lágrimas, com júbilo ceifarão.", reference: "Salmos 126:5" },
-        { text: "A resposta branda desvia o furor, mas a palavra dura suscita a ira.", reference: "Provérbios 15:1" },
-        { text: "A soberba precede a ruína, e a altivez do espírito precede a queda.", reference: "Provérbios 16:18" },
-        { text: "O amigo ama em todos os momentos; é um irmão na adversidade.", reference: "Provérbios 17:17" },
-        { text: "Aquele que anda com os sábios será cada vez mais sábio, mas o companheiro dos tolos acabará mal.", reference: "Provérbios 13:20" },
-        { text: "Toda palavra de Deus é pura; ele é escudo para os que nele confiam.", reference: "Provérbios 30:5" },
-        { text: "O Senhor sustenta a todos os que caem e levanta a todos os abatidos.", reference: "Salmos 145:14" },
-        { text: "No amor não há medo; antes, o perfeito amor lança fora o medo.", reference: "1 João 4:18" },
-        { text: "Os céus proclamam a glória de Deus, e o firmamento anuncia a obra das suas mãos.", reference: "Salmos 19:1" },
-        { text: "O Senhor firma os passos do homem bom e se agrada do seu caminho.", reference: "Salmos 37:23" },
-        { text: "Porque a palavra do Senhor é reta, e todo o seu proceder é fiel.", reference: "Salmos 33:4" },
-        { text: "Se confessarmos os nossos pecados, ele é fiel e justo para nos perdoar os pecados.", reference: "1 João 1:9" },
-        { text: "Guarda-me, ó Deus, porque em ti me refugio.", reference: "Salmos 16:1" },
-        { text: "Aquele que habita no esconderijo do Altíssimo e descansa à sombra do Todo-Poderoso.", reference: "Salmos 91:1" },
-        { text: "Perto está o Senhor dos que têm o coração quebrantado.", reference: "Salmos 34:18" },
-        { text: "Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai senão por mim.", "reference": "João 14:6" },
-        { text: "Não vos inquieteis com nada; antes, as vossas petições sejam em tudo conhecidas diante de Deus.", reference: "Filipenses 4:6" },
-        { text: "Aquele que não ama não conhece a Deus, porque Deus é amor.", reference: "1 João 4:8" },
-        { text: "O Senhor te guardará de todo mal; ele guardará a tua alma.", reference: "Salmos 121:7" },
-        { text: "A tua palavra escondi no meu coração, para eu não pecar contra ti.", reference: "Salmos 119:11" },
-        { text: "Se o meu povo, que se chama pelo meu nome, se humilhar e orar, e me buscar, então eu ouvirei dos céus.", reference: "2 Crônicas 7:14" },
-        { text: "Mas recebereis poder ao descer sobre vós o Espírito Santo, e ser-me-eis testemunhas.", reference: "Atos 1:8" },
-        { text: "E este é o testemunho: que Deus nos deu a vida eterna, e esta vida está em seu Filho.", reference: "1 João 5:11" },
-        { text: "Bem-aventurados os que choram, porque serão consolados.", reference: "Mateus 5:4" },
-        { text: "O Senhor dará graça e glória; não negará bem algum aos que andam retamente.", reference: "Salmos 84:11" },
-        { text: "Muitas são as aflições do justo, mas o Senhor o livra de todas.", reference: "Salmos 34:19" },
-        { text: "A boca fala do que está cheio o coração.", reference: "Mateus 12:34" },
-        { text: "Seja a paz de Cristo o árbitro em vossos corações.", reference: "Colossenses 3:15" },
-        { text: "Assim resplandeça a vossa luz diante dos homens.", "reference": "Mateus 5:16" },
-        { text: "O Senhor não retarda a sua promessa, ainda que alguns a tenham por tardia.", reference: "2 Pedro 3:9" },
-        { text: "Tudo posso naquele que me fortalece.", reference: "Filipenses 4:13" },
-        { text: "Jesus Cristo é o mesmo ontem, hoje e eternamente.", reference: "Hebreus 13:8" },
-        { text: "Os mansos herdarão a terra e se deleitarão na abundância de paz.", reference: "Salmos 37:11" },
-        { text: "Esforçai-vos, e ele fortalecerá o vosso coração.", reference: "Salmos 31:24" },
-        { text: "Porque Deus é quem efetua em vós tanto o querer como o realizar.", reference: "Filipenses 2:13" },
-        { text: "Porque para mim tenho por certo que os sofrimentos do tempo presente não são para comparar com a glória que em nós há de ser revelada.", reference: "Romanos 8:18" },
-        { text: "Bendito seja o Senhor, porque ouviu a voz das minhas súplicas.", reference: "Salmos 28:6" },
-        { text: "Deus é amor, e aquele que permanece no amor permanece em Deus, e Deus nele.", reference: "1 João 4:16" },
-        { text: "Ame o Senhor, seu Deus, de todo o seu coração, de toda a sua alma e de todo o seu entendimento.", reference: "Mateus 22:37" },
-        { text: "Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente.", reference: "Romanos 12:2" },
-        { text: "O Senhor corrige a quem ama, assim como o pai ao filho a quem quer bem.", reference: "Provérbios 3:12" },  
-        { text: "O homem que muitas vezes repreendido endurece a cerviz será quebrantado de repente, sem que haja cura.", reference: "Provérbios 29:1" },  
-        { text: "A repreensão penetra mais profundamente no prudente do que cem açoites no insensato.", reference: "Provérbios 17:10" },  
-        { text: "Melhor é a repreensão aberta do que o amor encoberto.", reference: "Provérbios 27:5" },  
-        { text: "Quem ama a disciplina ama o conhecimento, mas o que aborrece a repreensão é estúpido.", reference: "Provérbios 12:1" },  
-        { text: "Quem esconde os seus pecados não prospera, mas quem os confessa e os abandona encontra misericórdia.", reference: "Provérbios 28:13" },  
-        { text: "Ai dos que ao mal chamam bem e ao bem mal.", reference: "Isaías 5:20" },  
-        { text: "Todo caminho do homem é reto aos seus olhos, mas o Senhor sonda os corações.", reference: "Provérbios 21:2" },  
-        { text: "Não repreendas o escarnecedor, para que não te odeie; repreende o sábio, e ele te amará.", reference: "Provérbios 9:8" },  
-        { text: "Aquele que desvia os seus ouvidos de ouvir a lei, até a sua oração será abominável.", reference: "Provérbios 28:9" },  
-        { text: "Aquele que anda com os sábios será cada vez mais sábio, mas o companheiro dos tolos acabará mal.", reference: "Provérbios 13:20" },  
-        { text: "Porque a ira de Deus se revela do céu contra toda impiedade e injustiça dos homens.", reference: "Romanos 1:18" },  
-        { text: "Se dissermos que não temos pecado, enganamo-nos a nós mesmos, e a verdade não está em nós.", reference: "1 João 1:8" },  
-        { text: "Deus não se deixa escarnecer; tudo o que o homem semear, isso também ceifará.", reference: "Gálatas 6:7" },  
-        { text: "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.", reference: "Provérbios 9:10" },  
-        { text: "O salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna.", reference: "Romanos 6:23" },  
-        { text: "Pois os olhos do Senhor estão sobre os caminhos do homem, e ele vê todos os seus passos.", reference: "Jó 34:21" },  
-        { text: "Todo aquele que pratica o pecado também transgride a lei, porque o pecado é a transgressão da lei.", reference: "1 João 3:4" },  
-        { text: "Quem, pois, sabe fazer o bem e não o faz, comete pecado.", reference: "Tiago 4:17" },  
-        { text: "Portanto, sede vós perfeitos como perfeito é o vosso Pai celestial.", reference: "Mateus 5:48" },  
-        { text: "Maldito aquele que fizer a obra do Senhor relaxadamente!", reference: "Jeremias 48:10" },  
-        { text: "Ai de vós, escribas e fariseus, hipócritas! Porque sois semelhantes aos sepulcros caiados.", reference: "Mateus 23:27" },  
-        { text: "Não ameis o mundo, nem o que no mundo há. Se alguém ama o mundo, o amor do Pai não está nele.", reference: "1 João 2:15" },  
-        { text: "Se alguém quiser vir após mim, negue-se a si mesmo, tome a sua cruz e siga-me.", reference: "Mateus 16:24" },  
-        { text: "Não podeis beber o cálice do Senhor e o cálice dos demônios.", reference: "1 Coríntios 10:21" },  
-        { text: "Ai dos que confiam na sua própria justiça!", reference: "Lucas 18:9" },  
-        { text: "A soberba precede a ruína, e a altivez do espírito precede a queda.", reference: "Provérbios 16:18" },  
-        { text: "Portanto, aquele que pensa estar em pé veja que não caia.", reference: "1 Coríntios 10:12" },  
-        { text: "Ai dos que descem ao Egito em busca de socorro, mas não buscam ao Senhor!", reference: "Isaías 31:1" },  
-        { text: "E não entristeçais o Espírito Santo de Deus, no qual fostes selados para o dia da redenção.", reference: "Efésios 4:30" },  
-        { text: "Mas eu vos digo que de toda palavra frívola que os homens disserem, dela darão conta no dia do juízo.", reference: "Mateus 12:36" },  
-        { text: "Filho meu, não rejeites a disciplina do Senhor, nem te enfades da sua repreensão.", reference: "Provérbios 3:11" },  
-        { text: "Fujam da imoralidade sexual. Todos os outros pecados o homem os comete fora do corpo, mas quem peca sexualmente peca contra o próprio corpo.", reference: "1 Coríntios 6:18" },  
-        { text: "Bem-aventurado o homem que continuamente teme ao Senhor, mas o que endurece o coração cairá no mal.", reference: "Provérbios 28:14" },  
-        { text: "Não sejais cúmplices das obras infrutíferas das trevas; antes, reprovai-as.", reference: "Efésios 5:11" },  
-        { text: "Quem tapa o ouvido ao clamor do pobre, também clamará e não será ouvido.", reference: "Provérbios 21:13" },  
-        { text: "Não vos enganeis: as más companhias corrompem os bons costumes.", reference: "1 Coríntios 15:33" },  
-        { text: "Repreende ao sábio, e ele te amará.", reference: "Provérbios 9:8" },  
-        { text: "De que se queixa, pois, o homem vivente? Queixe-se cada um dos seus próprios pecados.", reference: "Lamentações 3:39" },  
-        { text: "Porque há caminhos que ao homem parecem direitos, mas o fim deles é a morte.", reference: "Provérbios 14:12" },  
-        { text: "Ai daqueles que vivem despreocupados em Sião!", reference: "Amós 6:1" },  
-        { text: "O Senhor abomina o sacrifício dos ímpios, mas a oração dos retos é o seu contentamento.", reference: "Provérbios 15:8" },  
-        { text: "Os que querem enriquecer caem em tentação, e em laço, e em muitas concupiscências loucas e nocivas.", reference: "1 Timóteo 6:9" },  
-        { text: "Porque o Senhor repreende aquele a quem ama, assim como o pai ao filho a quem quer bem.", reference: "Provérbios 3:12" },  
-        { text: "Não sejais vagarosos no cuidado; sede fervorosos no espírito, servindo ao Senhor.", reference: "Romanos 12:11" },  
-        { text: "Não desprezeis as profecias, mas examinai tudo e retende o bem.", reference: "1 Tessalonicenses 5:20-21" },
-        { text: "No princípio, criou Deus os céus e a terra.", reference: "Gênesis 1:1" },
-        { text: "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.", reference: "João 3:16" },
-        { text: "Tudo posso naquele que me fortalece.", reference: "Filipenses 4:13" },
-        { text: "Clama a mim, e responder-te-ei, e anunciar-te-ei coisas grandes e firmes que não sabes.", reference: "Jeremias 33:3" },
-        { text: "Lâmpada para os meus pés é tua palavra, e luz para o meu caminho.", reference: "Salmos 119:105" },
-        { text: "Deem graças em todas as circunstâncias, pois esta é a vontade de Deus para vocês em Cristo Jesus.", reference: "1 Tessalonicenses 5:18" },
-        { text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", reference: "1 Pedro 5:7" },
-        { text: "Sujeitai-vos, pois, a Deus; resisti ao diabo, e ele fugirá de vós.", reference: "Tiago 4:7" },
-        { text: "Não se turbe o vosso coração; credes em Deus, crede também em mim.", reference: "João 14:1" },
-        { text: "Perto está o Senhor dos que têm o coração quebrantado e salva os contritos de espírito.", reference: "Salmos 34:18" },
-        { text: "Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.", reference: "Mateus 6:33" },
-        { text: "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.", reference: "Provérbios 9:10" },
-        { text: "Ensina-nos a contar os nossos dias, de tal maneira que alcancemos corações sábios.", reference: "Salmos 90:12" },
-        { text: "O Senhor é a minha luz e a minha salvação; a quem temerei? O Senhor é a força da minha vida; de quem me recearei?", reference: "Salmos 27:1" },
-        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano, planos de dar a vocês esperança e um futuro.", reference: "Jeremias 29:11" },
-        { text: "E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.", reference: "Romanos 8:28" },
-        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
-        { text: "Alegrai-vos sempre no Senhor; outra vez digo: alegrai-vos.", reference: "Filipenses 4:4" },
-        { text: "Não desprezeis as profecias, mas examinai tudo e retende o bem.", reference: "1 Tessalonicenses 5:20-21" },
-        { text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", reference: "1 Pedro 5:7" },
-        { text: "Não se turbe o vosso coração; credes em Deus, crede também em mim.", reference: "João 14:1" },
-        { text: "Perto está o Senhor dos que têm o coração quebrantado e salva os contritos de espírito.", reference: "Salmos 34:18" },
-        { text: "Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.", reference: "Mateus 6:33" },
-        { text: "O temor do Senhor é o princípio da sabedoria, e o conhecimento do Santo é entendimento.", reference: "Provérbios 9:10" },
-        { text: "Ensina-nos a contar os nossos dias, de tal maneira que alcancemos corações sábios.", reference: "Salmos 90:12" },
-        { text: "O Senhor é a minha luz e a minha salvação; a quem temerei? O Senhor é a força da minha vida; de quem me recearei?", reference: "Salmos 27:1" },
-        { text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de lhes causar dano, planos de dar a vocês esperança e um futuro.", reference: "Jeremias 29:11" },
-        { text: "E sabemos que todas as coisas contribuem juntamente para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.", reference: "Romanos 8:28" },
-        { text: "Se Deus é por nós, quem será contra nós?", reference: "Romanos 8:31" },
-        { text: "Alegrai-vos sempre no Senhor; outra vez digo: alegrai-vos.", reference: "Filipenses 4:4" },
-        { text: "Não desprezeis as profecias, mas examinai tudo e retende o bem.", reference: "1 Tessalonicenses 5:20-21" },
-        { text: "Quem nos separará do amor de Cristo? Será tribulação, ou angústia, ou perseguição?", reference: "Romanos 8:35" }
-
-      
-
+            { text: "O Senhor é meu pastor, nada me falta.", reference: "Salmos 23:1" },
+            { text: "Porque Deus amou o mundo de tal maneira...", reference: "João 3:16" },
+            { text: "Posso todas as coisas naquele que me fortalece.", reference: "Filipenses 4:13" },
         ];
-
+    
         const canvas = document.querySelector('.scratch-canvas');
         const ctx = canvas.getContext('2d');
         const card = document.querySelector('.card');
         const message = document.getElementById('message');
-
+    
         function resizeCanvas() {
             canvas.width = card.offsetWidth;
             canvas.height = card.offsetHeight;
             ctx.fillStyle = 'gray';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
-
+    
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
-
+    
         let isDrawing = false;
-
+    
         function getMousePos(e) {
             const rect = canvas.getBoundingClientRect();
             return { x: e.clientX - rect.left, y: e.clientY - rect.top };
         }
-
+    
         function getTouchPos(e) {
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];
             return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
         }
-
+    
         function scratch(e) {
             if (!isDrawing) return;
             e.preventDefault();
             const { x, y } = e.touches ? getTouchPos(e) : getMousePos(e);
-
+    
             ctx.globalCompositeOperation = 'destination-out';
             ctx.beginPath();
             ctx.arc(x, y, 20, 0, Math.PI * 2);
             ctx.fill();
         }
-
-        // Função para obter ou definir o versículo do dia no localStorage
+    
+        // Função para obter ou definir o versículo do dia no localStorage, sem repetições
         function getTodaysVerse() {
             const currentDate = new Date().toLocaleDateString();
+            let usedVerses = JSON.parse(localStorage.getItem('usedVerses')) || []; // Lista de versículos já usados
+    
             const savedData = JSON.parse(localStorage.getItem('todaysVerse'));
-
+    
+            // Se já tiver um versículo de hoje, retorna ele
             if (savedData && savedData.date === currentDate) {
                 return savedData.verse;
             } else {
-                const newVerse = verses[Math.floor(Math.random() * verses.length)];
-                localStorage.setItem('todaysVerse', JSON.stringify({ date: currentDate, verse: newVerse }));
+                let newVerse;
+    
+                // Filtra os versículos não exibidos
+                const remainingVerses = verses.filter(v => !usedVerses.includes(v.text));
+    
+                // Se todos os versículos já foram exibidos, reinicia a lista
+                if (remainingVerses.length === 0) {
+                    usedVerses = []; // Limpa a lista de usados
+                }
+    
+                // Escolhe um versículo aleatório dos não exibidos
+                newVerse = remainingVerses[Math.floor(Math.random() * remainingVerses.length)];
+    
+                // Adiciona o novo versículo à lista de usados
+                usedVerses.push(newVerse.text);
+                localStorage.setItem('usedVerses', JSON.stringify(usedVerses)); // Salva a lista de usados
+                localStorage.setItem('todaysVerse', JSON.stringify({ date: currentDate, verse: newVerse })); // Salva o versículo de hoje
+    
                 return newVerse;
             }
         }
-
+    
         function checkLastUsedDate() {
             const currentDate = new Date().toLocaleDateString();
             const lastUsedDate = localStorage.getItem('lastUsedDate');
             const todaysVerse = getTodaysVerse();
-
+    
             document.getElementById('verse').innerText = `"${todaysVerse.text}"`;
             document.getElementById('reference').innerText = todaysVerse.reference;
-
+    
             if (lastUsedDate === currentDate) {
                 message.innerText = "Deus já falou contigo hoje. Volte novamente amanhã.";
                 canvas.style.display = 'none';
@@ -384,14 +221,15 @@
                 canvas.addEventListener('mousedown', () => isDrawing = true);
                 canvas.addEventListener('mouseup', () => isDrawing = false);
                 canvas.addEventListener('mousemove', scratch);
-
+    
                 canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
                 canvas.addEventListener('touchend', () => isDrawing = false);
                 canvas.addEventListener('touchmove', scratch);
             }
         }
-
+    
         checkLastUsedDate();
     </script>
+    
 </body>
 </html>
