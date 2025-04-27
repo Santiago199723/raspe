@@ -8,15 +8,20 @@
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap');
 
         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: 'Georgia', serif;
-            text-align: center;
-        }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Georgia', serif;
+    text-align: center;
+    overflow: hidden; /* Impede que qualquer conteúdo gere rolagem */
+}
+
 
         h1 {
             font-family: 'Great Vibes', cursive;
@@ -27,20 +32,21 @@
         }
 
         .card {
-            position: relative;
-            width: 320px;
-            height: 220px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            overflow: hidden;
-        }
+    position: relative;
+    width: 320px;
+    height: 250px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden; /* Impede que o conteúdo gere rolagem dentro do card */
+}
+
 
         #verse {
             font-size: 22px;
